@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 
-export const Meta = () => {
+export const Meta = (): JSX.Element => {
   return (
     <Head>
       <title>Create Next App</title>

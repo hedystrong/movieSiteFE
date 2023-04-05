@@ -1,22 +1,33 @@
 import React from "react";
+import Link from "next/link";
 
-interface Movie {
-  _id: string;
-  title: string;
-  poster: string;
-  plot: string;
+import { IMovie } from "./Movies";
+import { TomatoesMeter } from "./TomatoesMeter";
+
+interface myProps {
+  item: IMovie;
+  key?: number;
 }
 
-interface MovieCardProps {
-  key: number;
-  item: Movie;
-}
-
-export const MovieCard = ({ item, key }: MovieCardProps) => {
-  return (
-    <div className="flex-1 w-64">
-      <img src={item.poster} alt={item.title} width="400" height={"250"} />
-      <h1>{item.title}</h1>
-    </div>
-  );
+export const MovieCard = ({ item }: myProps): JSX.Element => {
+  const date = new Date(item.released);
+  if (item.poster) {
+    return (
+      <div className="w-full">
+        <img src={item.poster} width={200} alt={item.title} />
+        <div className="flex">
+          <TomatoesMeter
+            criticMeter={item.tomatoes.critic?.meter}
+            viewerMeter={item.tomatoes.viewer?.meter}
+          />
+        </div>
+        <Link href={`/movie/${item._id}`}>
+          <h1>{item.title}</h1>
+        </Link>
+        <span>Opens up {date.toLocaleDateString()}</span>
+      </div>
+    );
+  } else {
+    return <></>;
+  }
 };

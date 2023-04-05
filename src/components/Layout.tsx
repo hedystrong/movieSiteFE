@@ -1,15 +1,20 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Meta } from "./Meta";
-import { Header } from "./Header";
 import { Footer } from "./Footer";
+import { Navbar } from "./Navbar";
+interface MyProps {
+  children?: ReactNode;
+}
 
-export const Layout = ({ children }: any) => {
+export const Layout = ({ children }: MyProps): JSX.Element => {
   return (
     <>
       <Meta />
-      <Header />
-      <main>{children}</main>
-      <Footer />
+      <div className="max-w-5xl mx-auto pt-6">
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
+      </div>
     </>
   );
 };
